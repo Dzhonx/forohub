@@ -1,222 +1,156 @@
-🚀 ForoHub API
+# 🚀 ForoHub API
 
+![Java](https://img.shields.io/badge/Java-17-blue) ![Spring
+Boot](https://img.shields.io/badge/Spring%20Boot-3.5.11-brightgreen)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![JWT](https://img.shields.io/badge/JWT-JSON%20Web%20Token-purple)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
+------------------------------------------------------------------------
 
+## 📋 Descripción
 
-
-
-
-
-
-
-📋 Descripción
-
-ForoHub es una API REST desarrollada con Java 17 y Spring Boot 3 que simula el backend de un foro de preguntas y respuestas.
+**ForoHub** es una API REST desarrollada con **Java 17** y **Spring Boot
+3** que simula el backend de un foro de preguntas y respuestas.
 
 Permite a los usuarios:
 
-🔐 Autenticarse mediante JWT
+-   🔐 Autenticarse mediante JWT\
+-   📝 Crear tópicos\
+-   📖 Listarlos con paginación\
+-   🔎 Consultar detalles\
+-   ✏️ Actualizarlos\
+-   ❌ Eliminarlos
 
-📝 Crear tópicos
+La API sigue buenas prácticas de arquitectura REST, seguridad con Spring
+Security y control de versiones de base de datos con Flyway.
 
-📖 Listarlos con paginación
+------------------------------------------------------------------------
 
-🔎 Consultar detalles
+# 🛠️ Tecnologías Utilizadas
 
-✏️ Actualizarlos
+  Tecnología        Versión   Descripción
+  ----------------- --------- -----------------------------------
+  Java              17        Lenguaje principal
+  Spring Boot       3.5.11    Framework backend
+  Spring Security   6.x       Autenticación y autorización
+  Spring Data JPA   3.x       Persistencia de datos
+  JWT (JJWT)        0.11.5    Generación y validación de tokens
+  MySQL             8.0       Base de datos relacional
+  Flyway            11.x      Migraciones de base de datos
+  Lombok            1.18.42   Reducción de boilerplate
+  Maven             4.x       Gestión de dependencias
 
-❌ Eliminarlos
+------------------------------------------------------------------------
 
-La API sigue buenas prácticas de arquitectura REST, seguridad con Spring Security y control de versiones de base de datos con Flyway.
+# ✨ Funcionalidades
 
-Proyecto desarrollado como parte del desafío Spring Framework Challenge - Foro Hub (Alura Latam).
+## ✅ Implementadas
 
-🛠️ Tecnologías Utilizadas
-Tecnología	Versión	Descripción
-Java	17	Lenguaje principal
-Spring Boot	3.5.11	Framework backend
-Spring Security	6.x	Autenticación y autorización
-Spring Data JPA	3.x	Persistencia de datos
-JWT (JJWT)	0.11.5	Generación y validación de tokens
-MySQL	8.0	Base de datos relacional
-Flyway	11.x	Migraciones de base de datos
-Lombok	1.18.42	Reducción de boilerplate
-Maven	4.x	Gestión de dependencias
-✨ Funcionalidades
-✅ Implementadas
-🔐 Autenticación
+### 🔐 Autenticación
 
-Login con usuario y contraseña
+-   Login con usuario y contraseña
+-   Generación de token JWT
+-   Protección de endpoints
 
-Generación de token JWT
+### 📝 CRUD de Tópicos
 
-Protección de endpoints
+-   Crear nuevo tópico
+-   Listar tópicos con paginación
+-   Ver detalle por ID
+-   Actualizar tópico
+-   Eliminar tópico
 
-📝 CRUD de Tópicos
+### 🔎 Búsqueda avanzada
 
-Crear nuevo tópico
+-   Filtrar por curso
+-   Filtrar por año de creación
+-   Paginación y ordenamiento dinámico
 
-Listar tópicos con paginación
+### 🛡️ Validaciones
 
-Ver detalle por ID
+-   Campos obligatorios
+-   Prevención de tópicos duplicados (mismo título y mensaje)
+-   Autenticación requerida en endpoints protegidos
 
-Actualizar tópico
+------------------------------------------------------------------------
 
-Eliminar tópico
+# 📌 Endpoints
 
-🔎 Búsqueda avanzada
+  Método   Endpoint            Descripción                Requiere Token
+  -------- ------------------- -------------------------- ----------------
+  POST     `/auth`             Login de usuario           ❌
+  GET      `/topicos`          Listar tópicos             ✅
+  GET      `/topicos/{id}`     Detalle de tópico          ✅
+  POST     `/topicos`          Crear tópico               ✅
+  PUT      `/topicos/{id}`     Actualizar tópico          ✅
+  DELETE   `/topicos/{id}`     Eliminar tópico            ✅
+  GET      `/topicos/buscar`   Buscar por curso y/o año   ✅
+  
+  ------------------------------------------------------------------------
+<img width="886" height="166" alt="image" src="https://github.com/user-attachments/assets/3d4a2f5d-54ce-4539-b70a-da4cd326057b" />
+<img width="886" height="253" alt="image" src="https://github.com/user-attachments/assets/dddaf9e2-b2a1-4142-9263-65bee48c95ea" />
+<img width="886" height="537" alt="image" src="https://github.com/user-attachments/assets/eb9dff88-9878-483e-84d1-8f52fe77484f" />
 
-Filtrar por curso
+------------------------------------------------------------------------
 
-Filtrar por año de creación
+# 🗄️ Modelo de Datos
 
-Paginación y ordenamiento dinámico
+## 👤 Usuario
 
-🛡️ Validaciones
+-   id (Long, PK)
+-   login (String, único)
+-   password (String, encriptado con BCrypt)
 
-Campos obligatorios
+## 📌 Tópico
 
-Prevención de tópicos duplicados (mismo título y mensaje)
+-   id (Long, PK)
+-   titulo (String, obligatorio)
+-   mensaje (String, obligatorio)
+-   fecha_creacion (LocalDateTime)
+-   status (String) \[ABIERTO / CERRADO\]
+-   autor (String, obligatorio)
+-   curso (String, obligatorio)
 
-Autenticación requerida en endpoints protegidos
+------------------------------------------------------------------------
 
-📌 Endpoints
-Método	Endpoint	Descripción	Requiere Token
-POST	/auth	Login de usuario	❌
-GET	/topicos	Listar tópicos	✅
-GET	/topicos/{id}	Detalle de tópico	✅
-POST	/topicos	Crear tópico	✅
-PUT	/topicos/{id}	Actualizar tópico	✅
-DELETE	/topicos/{id}	Eliminar tópico	✅
-GET	/topicos/buscar	Buscar por curso y/o año	✅
-🗄️ Modelo de Datos
-👤 Usuario
-- id (Long, PK)
-- login (String, único)
-- password (String, encriptado con BCrypt)
-📌 Tópico
-- id (Long, PK)
-- titulo (String, obligatorio)
-- mensaje (String, obligatorio)
-- fecha_creacion (LocalDateTime)
-- status (String) [ABIERTO / CERRADO]
-- autor (String, obligatorio)
-- curso (String, obligatorio)
-⚙️ Configuración y Ejecución
-🔹 Prerrequisitos
+# ⚙️ Configuración y Ejecución
 
-Java JDK 17+
+## 🔹 Prerrequisitos
 
-Maven 4+
+-   Java JDK 17+
+-   Maven 4+
+-   MySQL 8+
+-   Git
 
-MySQL 8+
+------------------------------------------------------------------------
 
-Git
+## 🔹 Instalación
 
-🔹 Variables de Entorno (Opcional)
-DB_URL=jdbc:mysql://localhost:3306/forohub
-DB_USER=root
-DB_PASSWORD=tu_contraseña
-JWT_SECRET=tu_clave_secreta_jwt
-🔹 Instalación
-# 1. Clonar repositorio
+``` bash
 git clone https://github.com/Dzhonx/forohub.git
 cd forohub
 
-# 2. Crear base de datos
 mysql -u root -p
 CREATE DATABASE forohub;
 exit;
 
-# 3. Ejecutar aplicación
 mvn spring-boot:run
-🔹 application.properties
-# Base de datos
-spring.datasource.url=jdbc:mysql://localhost:3306/forohub
-spring.datasource.username=root
-spring.datasource.password=TU_CONTRASEÑA
+```
 
-# JPA
-spring.jpa.hibernate.ddl-auto=validate
-spring.jpa.show-sql=true
+------------------------------------------------------------------------
 
-# Flyway
-spring.flyway.enabled=true
+# 👨‍💻 Autor
 
-# JWT
-api.security.token.secret=super-secret-key-1234567890123456
-🧪 Uso de la API
-🔐 1. Autenticación
-POST http://localhost:8080/auth
-Content-Type: application/json
-
-{
-  "login": "admin",
-  "password": "123456"
-}
-
-Respuesta:
-
-eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc0MDYxMjM0NX0...
-📝 2. Crear un Tópico
-POST http://localhost:8080/topicos
-Authorization: Bearer TU_TOKEN
-Content-Type: application/json
-
-{
-  "titulo": "Duda sobre Spring Boot",
-  "mensaje": "¿Cómo configurar Spring Security con JWT?",
-  "autor": "Juan Pérez",
-  "curso": "Spring Framework"
-}
-📖 3. Listar con Paginación
-GET http://localhost:8080/topicos?page=0&size=10&sort=fechaCreacion,desc
-Authorization: Bearer TU_TOKEN
-🔎 4. Buscar por Curso y Año
-GET http://localhost:8080/topicos/buscar?curso=Spring&anio=2026
-Authorization: Bearer TU_TOKEN
-📁 Estructura del Proyecto
-forohub/
-├── src/
-│   ├── main/
-│   │   ├── java/com/forohub/
-│   │   │   ├── controller/
-│   │   │   ├── domain/
-│   │   │   ├── repository/
-│   │   │   ├── security/
-│   │   │   └── ForohubApplication.java
-│   │   └── resources/
-│   │       ├── db/migration/
-│   │       └── application.properties
-│   └── test/
-├── pom.xml
-└── README.md
-🧪 Pruebas
-
-Puedes probar la API con:
-
-Insomnia (recomendado)
-
-Postman
-
-cURL
-
-👨‍💻 Autor
-
-Dzhonx
+**Dzhonx**\
 GitHub: https://github.com/Dzhonx
 
-📄 Licencia
+------------------------------------------------------------------------
 
-Este proyecto está bajo la licencia MIT.
-Consulta el archivo LICENSE para más información.
+# 📄 Licencia
 
-🙌 Agradecimientos
+Este proyecto está bajo la licencia **MIT**.
 
-Alura Latam
-
-Oracle Next Education
-
-Spring Boot
+------------------------------------------------------------------------
 
 ⭐ Si te gustó el proyecto, ¡no olvides darle una estrella en GitHub!
